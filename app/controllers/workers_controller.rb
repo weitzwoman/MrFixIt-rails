@@ -1,8 +1,10 @@
 class WorkersController < ApplicationController
+  before_action :authenticate_worker!
+
   def show
     @worker = current_worker
-    @active_jobs = @worker.jobs.where(active: true)
-    @complete_jobs = @worker.jobs.where(completed: true)
+    # @active_jobs = @worker.jobs.where(active: true)
+    # @complete_jobs = @worker.jobs.where(completed: true)
   end
 
   def new

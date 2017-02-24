@@ -3,27 +3,18 @@
 
   <ul>
     <% current_worker.jobs.each do |job| %>
-    <li><%= link_to job.title, job_path(job) %></li>
-    <p>Click Button if Job Active <%= button_to "Active", job_path(job), method: "patch", remote: true %></p>
-    <p>Click Button if Job Completed <%= button_to "Completed", job_path(job), method: "patch", remote: true %></p>
+      <li><%= link_to job.title, job_path(job) %>
+      <%= button_to "Active", job_path(job), method: "patch", remote: true %>
+      <%= button_to "Completed", job_path(job), method: "patch", remote: true %>
+      </li>
     <% end %>
   </ul>
 </div>
 
-<div id="active-job">
-  <h3>Active Jobs:</h3>
-  <ul>
-    <% @active_jobs.each do |job| %>
-      <li><%= link_to job.title, job_path(job) %></li>
-    <% end %>
-  <ul>
+<div id="active-jobs">
+
 </div>
 
-<div id="complete-job">
-  <h3>Complete Jobs:</h3>
-  <ul>
-    <% @complete_jobs.each do |job| %>
-      <li><%= link_to job.title, job_path(job) %></li>
-    <% end %>
-  <ul>
+<div id="complete-jobs">
+
 </div>

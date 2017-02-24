@@ -1,1 +1,6 @@
-<h4>Completed Job</h4>
+<h3>Completed Job</h3>
+<ul>
+  <% current_worker.each do |job| %>
+    <li><%= link_to job.title, job_path(job) %></li>
+  <% end %>
+<ul>

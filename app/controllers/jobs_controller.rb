@@ -28,7 +28,19 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
     if current_worker
-      if @job.update(pending: true, worker_id: current_worker.id)
+      if @job.update(active: true)
+        respond_to do |format|
+          flash[:notice] = "Active Job"
+          format.html {redirect_to worker_path(current_worker)}
+          format.js {render 'update'}
+        end
+      elsif @job.update(completed: true)
+          respond_to do |format|
+            flash[:notice] = "Complete Job"
+            format.html {redirect_to worker_path(current_worker)}
+            format.js {render 'update'}
+          end
+      elsif @job.update(pending: true, worker_id: current_worker.id)
         respond_to do |format|
           flash[:notice] = "You've successfully claimed this job."
           format.html {redirect_to worker_path(current_worker)}
@@ -45,43 +57,43 @@ class JobsController < ApplicationController
     end
   end
 
-  def job_active
-    @job = Job.find(params[:id])
-    if current_worker
-      if @job.update(active: true, worker_id: current_worker.id)
-        respond_to do |format|
-          flash[:notice] = "Complete Job"
-          format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'update'}
-        end
-      else
-        flash[:alert] = "Something went wrong!"
-        render :show
-      end
-    else
-      flash[:notice] = "something else happened"
-      redirect_to job_path(@job)
-    end
-  end
-
-  def job_complete
-    @job = Job.find(params[:id])
-    if current_worker
-      if @job.update(completed: true, worker_id: current_worker.id)
-        respond_to do |format|
-          flash[:notice] = "Complete Job"
-          format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'update'}
-        end
-      else
-        flash[:alert] = "Something went wrong!"
-        render :show
-      end
-    else
-      flash[:notice] = "something else happened"
-      redirect_to job_path(@job)
-    end
-  end
+  # def job_active
+  #   @job = Job.find(params[:id])
+  #   if current_worker
+  #     if @job.update(active: true, worker_id: current_worker.id)
+  #       respond_to do |format|
+  #         flash[:notice] = "Complete Job"
+  #         format.html {redirect_to worker_path(current_worker)}
+  #         format.js {render 'update'}
+  #       end
+  #     else
+  #       flash[:alert] = "Something went wrong!"
+  #       render :show
+  #     end
+  #   else
+  #     flash[:notice] = "something else happened"
+  #     redirect_to job_path(@job)
+  #   end
+  # end
+  #
+  # def job_complete
+  #   @job = Job.find(params[:id])
+  #   if current_worker
+  #     if @job.update(completed: true, worker_id: current_worker.id)
+  #       respond_to do |format|
+  #         flash[:notice] = "Complete Job"
+  #         format.html {redirect_to worker_path(current_worker)}
+  #         format.js {render 'update'}
+  #       end
+  #     else
+  #       flash[:alert] = "Something went wrong!"
+  #       render :show
+  #     end
+  #   else
+  #     flash[:notice] = "something else happened"
+  #     redirect_to job_path(@job)
+  #   end
+  # end
 
 private
   def job_params
