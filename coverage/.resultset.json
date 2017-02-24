@@ -616,7 +616,7 @@
         1,
         null,
         1,
-        1,
+        null,
         null
       ],
       "/Users/Guest/Desktop/MrFixIt-rails/app/helpers/application_helper.rb": [
@@ -650,6 +650,6 @@
         null
       ]
     },
-    "timestamp": 1487953857
+    "timestamp": 1487954999
   }
 }
