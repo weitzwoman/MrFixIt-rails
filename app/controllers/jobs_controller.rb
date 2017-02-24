@@ -5,7 +5,7 @@ class JobsController < ApplicationController
   end
 
   def new
-   @job = Job.new
+    @job = Job.new
   end
 
   def show
@@ -17,6 +17,7 @@ class JobsController < ApplicationController
     if @job.save
       redirect_to jobs_path
     else
+      flash[:alert] = "Error: Job Not Created"
       render :new
     end
   end
@@ -25,11 +26,14 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     if current_worker
       if @job.update(pending: true, worker_id: current_worker.id)
-        redirect_to worker_path(current_worker)
-        flash[:notice] = "You've successfully claimed this job."
+        respond_to do |format|
+          flash[:notice] = "You've successfully claimed this job."
+          format.html {redirect_to worker_path(current_worker)}
+          format.js {render 'create'}
+        end
       else
+        flash[:alert] = "Something went wrong!"
         render :show
-        flash[:notice] = "Something went wrong!"
       end
     else
       # We need to streamline this process better in the future! - Mr. Fix-It.

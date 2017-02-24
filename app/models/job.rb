@@ -1,4 +1,4 @@
 class Job < ActiveRecord::Base
   validates :title, :description, :presence => true
-  belongs_to :worker
+  # belongs_to :worker
 end
