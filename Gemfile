@@ -12,7 +12,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'simple_form'
 gem 'will_paginate', '~> 3.1.0'
 gem 'toastr-rails'
-gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 group :development, :test do
