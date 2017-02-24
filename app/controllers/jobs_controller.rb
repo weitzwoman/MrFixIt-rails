@@ -45,14 +45,14 @@ class JobsController < ApplicationController
     end
   end
 
-  def edit
+  def jobcomplete
     @job = Job.find(params[:id])
     if current_worker
-      if @job.edit(worker_id: current_worker.id)
+      if @job.update(complete: true, worker_id: current_worker.id)
         respond_to do |format|
-          flash[:notice] = "Active Job"
+          flash[:notice] = "Complete Job"
           format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'edit'}
+          format.js {render 'update'}
         end
       else
         flash[:alert] = "Something went wrong!"
@@ -60,6 +60,7 @@ class JobsController < ApplicationController
       end
     else
       flash[:notice] = "something else happened"
+      redirect_to job_path(@job)
     end
   end
 

@@ -1,10 +1,25 @@
-<h1><%= current_worker.email %>'s claimed jobs:</h1>
+<div id="claimed-jobs">
+  <h1><%= current_worker.email %>'s claimed jobs:</h1>
 
-<ul>
-  <% current_worker.jobs.each do |job| %>
+  <ul>
+    <% current_worker.jobs.each do |job| %>
     <li><%= link_to job.title, job_path(job) %></li>
-    <div id="active-job">
-      <p>Click Button if Active Job <%= button_to "Active", edit_job_path(job), method: "get", remote: true %></p>
-    </div>
-  <% end %>
-</ul>
+    <p>Click Button if Job Active <%= button_to "Active", job_path(job), method: "patch", remote: true %></p>
+    <p>Click Button if Job Complete <%= button_to "Complete", job_path(job), method: "patch", remote: true %></p>
+    <% end %>
+  </ul>
+</div>
+
+<div id="active-job">
+  <ul>
+    <% current_worker.jobs.each do |job| %>
+    <li><%= link_to job.title, job_path(job) %></li>
+  <ul>
+</div>
+
+<div id="complete-job">
+  <ul>
+    <% current_worker.jobs.each do |job| %>
+    <li><%= link_to job.title, job_path(job) %></li>
+  <ul>
+</div>
