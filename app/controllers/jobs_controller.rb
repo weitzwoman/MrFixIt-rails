@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create]
+  before_action :authenticate_worker!, :only => [:update]
 
   def index
     @jobs = Job.all
@@ -41,6 +42,24 @@ class JobsController < ApplicationController
       # We need to streamline this process better in the future! - Mr. Fix-It.
       flash[:notice] = 'You must have a worker account to claim a job. Register for one using the link in the navbar above.'
       redirect_to job_path(@job)
+    end
+  end
+
+  def edit
+    @job = Job.find(params[:id])
+    if current_worker
+      if @job.edit(worker_id: current_worker.id)
+        respond_to do |format|
+          flash[:notice] = "Active Job"
+          format.html {redirect_to worker_path(current_worker)}
+          format.js {render 'edit'}
+        end
+      else
+        flash[:alert] = "Something went wrong!"
+        render :show
+      end
+    else
+      flash[:notice] = "something else happened"
     end
   end
 

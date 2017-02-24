@@ -3,5 +3,8 @@
 <ul>
   <% current_worker.jobs.each do |job| %>
     <li><%= link_to job.title, job_path(job) %></li>
+    <div id="active-job">
+      <p>Click Button if Active Job <%= button_to "Active", edit_job_path(job), method: "get", remote: true %></p>
+    </div>
   <% end %>
 </ul>
