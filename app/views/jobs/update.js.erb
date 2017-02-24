@@ -1,7 +1,7 @@
 $('#claim-job').hide().after('<%= j render "claimjob" %>');
 
-<% if @job.completed? %>
-  $('#complete_jobs').appendTo('<%= j render "completejob" %>');
-<% elsif @job.active? %>
-  $('#active_jobs').appendTo('<%= j render "activejob" %>');
+<% if @job.completed == true %>
+  $('#complete_job').html('<%= j render "completejob" %>');
+<% elsif @job.active == true %>
+  $('#active_job').html('<%= j render "activejob" %>');
 <% end %>

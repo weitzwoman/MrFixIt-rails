@@ -1,46 +1,55 @@
-# Mr. Fix-It
+# _Mr Fix-It on Rails_
 
-## About Us
+#### _Mr. Fix-It is the one-stop-shop to crowd-source all your home repair needs. Need a fence repaired? Cabinets installed? Leaky pipe mended? Post the job on Mr.Fix-It. Then, independent handypeople, carpenters, plumbers, and more are able to view and claim jobs. It's like ride-sharing, but for home repairs! Epicodus Rails Week 3 Independent Project using existing code 2/24/2017_
 
-_Mr. Fix-It is the one-stop-shop to crowd-source all your home repair needs. Need a fence repaired? Cabinets installed? Leaky pipe mended? Post the job on Mr.Fix-It. Then, independent handypeople, carpenters, plumbers, and more are able to view and claim jobs. It's like ride-sharing, but for home repairs!_
+#### By _**Tracie Weitzman**_
 
-## Installation & Setup
+## Specifications
 
-- Fork this repository to your own GitHub account
-- Clone your forked repo to your local machine
-- Navigate to its directory in your terminal
-- `$ postgres` to start a server
-- `$ rake db:create` to load the database schema
-- `$ rake db:migrate` to load each database migration
-- `$ rake db:seed` to seed database with test user and worker accounts
-- `$ rails s` to start the rails server
-- Navigate to `localhost:3000` in your browser
+#### 1. Unique Basic Users can login and create Jobs, and view Jobs list. Basic Users can view Job details.  
 
-## Development Roadmap
+#### 2. Unique Workers can login and view Jobs list. Workers can view Job details.
 
-_Mr. Fix-It is still a work in progress. Here's what we've done so far, and what we'd still like to add:_
+#### 3. Workers can claim Jobs. Workers can view a list of Jobs they have claimed. Workers can indicate if claimed Jobs are active or completed.
 
-### Completed
+## Setup/Installation Requirements
 
-_The following functionality is present in our application:_
+* _In the Command Line, run:_
+```
+git clone https://github.com/weitzwoman/mrfixit-rails
+cd mrfixit-rails
+bundle install
+postgres
+```
 
-* Users can register for basic user accounts. These accounts allow them to post jobs.
-* Basic users can log into their accounts.
-* Basic users may post their jobs to the jobs list.
-* Basic users have the option to sign up for a Worker account, which allows them to claim and complete jobs.
-* A worker can claim a job, and see it in their "Worker Dashboard"
+* _In a separate Command Line, run:_
+```
+rails db:setup
+rails s
+```
+* _Then, in any modern browser, open:_
+```
+localhost:3000
+```
+## Known Bugs
 
-### Still Needed
+#### 1. AJAX not currently working to indicate Active or Completed Jobs.
 
-_The following must still be implemented:_
+## Support and contact details
 
-* Workers must be able to claim a job **via an AJAX action**.
-* A worker must be able to mark which jobs they're actively working on **using AJAX**.
-* Workers must be able to mark jobs "complete" **using AJAX**.
-* Site needs to look more presentable and polished.
-* Unit and integration testing needs to be implemented throughout.
+_Contact me on Github at [weitzwoman](https://github.com/weitzwoman)_
 
-## License
+## Technologies Used
+
+* _Ruby version 2.2.3_
+  * _Rails 5.0.1_
+* _Postgres_
+  * _ActiveRecord_
+* _HTML_
+* _SCSS_
+  * _Bootstrap_
+
+### License
 
 The MIT License (MIT)
 
@@ -62,4 +71,6 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+THE SOFTWARE..
+
+Copyright (c) 2017 **Tracie Weitzman**
