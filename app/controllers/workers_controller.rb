@@ -1,7 +1,6 @@
 class WorkersController < ApplicationController
   def show
     @worker = current_worker
-    render :show
   end
 
   def new

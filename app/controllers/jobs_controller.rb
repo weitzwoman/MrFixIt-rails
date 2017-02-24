@@ -6,7 +6,6 @@ class JobsController < ApplicationController
 
   def new
    @job = Job.new
-   render :new
   end
 
   def show
