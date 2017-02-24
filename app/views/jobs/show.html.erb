@@ -2,7 +2,9 @@
 
 <h3><%= @job.description %></h3>
 
-<% if @job.pending %>
+<% if current_worker.id == @job.worker_id %>
+  <p>You've claimed this job</p>
+<% elsif @job.pending %>
   <p>Someone has already claimed this job; it's currently pending.</p>
 <% else %>
   <div id="claim-job">

@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :authenticate_user!, :except => [:index, :show] 
+  before_action :authenticate_user!, :only => [:new, :create]
 
   def index
     @jobs = Job.all
@@ -31,7 +31,7 @@ class JobsController < ApplicationController
         respond_to do |format|
           flash[:notice] = "You've successfully claimed this job."
           format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'create'}
+          format.js {render 'update'}
         end
       else
         flash[:alert] = "Something went wrong!"
@@ -45,9 +45,7 @@ class JobsController < ApplicationController
   end
 
 private
-
   def job_params
     params.require(:job).permit(:title, :description, :user_id)
   end
-
 end
