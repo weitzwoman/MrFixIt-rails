@@ -7,32 +7,31 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <div class="header">
-      <h1 class="page-title">Mr. Fix-It</h1>
-      <h2>Crowd-sourced repairs!</h2>
-    </div>
-    <div class="navigation-menu">
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "See All Jobs", jobs_path %></li>
-        <li><%= link_to "Add Your Job", new_job_path %></li>
-        <% if worker_signed_in? %>
-          <p class="login-notice"><em>You're signed into your <%= current_worker.email %> <b>worker account</b></em></p>
-          <li><%= link_to "Worker Dashboard", worker_path(current_worker) %></li>
-          <li><%= link_to "Log Out", destroy_worker_session_path, :method => :delete %></li>
-        <% elsif user_signed_in? %>
-          <p class="login-notice"><em>You're signed in as <%= current_user.email %></em></p>
-          <li><%= link_to "Add Your Job", new_job_path %></li>
-          <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
-          <li><%= link_to "Register as a Worker", new_worker_registration_path %></li>
-        <% else %>
-          <li><%= link_to "Register as a Worker", new_worker_registration_path %></li>
-          <li><%= link_to "Register to Post Jobs", new_user_registration_path %></li>
-          <li><%= link_to "Log In as User", new_user_session_path %></li>
-          <li><%= link_to "Log In as Worker", new_worker_session_path %></li>
-        <% end %>
-      </ul>
-    </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= link_to "Mr. Fix-It", root_path, class: "navbar-brand" %>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "See All Jobs", jobs_path, class: "active" %></li>
+          <% if worker_signed_in? %>
+            <li class="nav navbar-nav navbar-right"><em>Signed in as <%= current_worker.email %> <b>worker account</b></em></li>
+            <li><%= link_to "Worker Dashboard", worker_path(current_worker) %></li>
+            <li><%= link_to "Log Out", destroy_worker_session_path, :method => :delete %></li>
+          <% elsif user_signed_in? %>
+            <li class="nav navbar-nav navbar-right"><em>Signed in as <%= current_user.email %>  <b>user account</b></em></li>
+            <li><%= link_to "Add Your Job", new_job_path %></li>
+            <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+            <li><%= link_to "Register as a Worker", new_worker_registration_path %></li>
+          <% else %>
+            <li><%= link_to "Register as a Worker", new_worker_registration_path %></li>
+            <li><%= link_to "Register to Post Jobs", new_user_registration_path %></li>
+            <li><%= link_to "Log In as User", new_user_session_path %></li>
+            <li><%= link_to "Log In as Worker", new_worker_session_path %></li>
+          <% end %>
+          </ul>
+      </div>
+    </nav>
     <div class="content">
       <div class="flash-messages">
         <h3><%= flash[:notice] %></h3>
