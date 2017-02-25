@@ -6,12 +6,13 @@
   <% if current_worker.id == @job.worker_id %>
     <p>You claimed the job</p>
     <div id="active-job">
-      <%= button_to "Active?", job_path(@job), method: "patch", remote: true %>
+      <%= button_to "Active?", job_path(@job.active), method: "patch", remote: true %>
     </div>
     <br>
     <div id="complete-job">
-      <%= button_to "Completed?", job_path(@job), method: "patch", remote: true %>
+      <%= button_to "Completed?", job_path(@job.completed), method: "patch", remote: true %>
     </div>
+
   <% else %>
     <div id="claim-job">
       <p>No one has claimed this job!</p>
