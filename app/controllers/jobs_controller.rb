@@ -30,22 +30,23 @@ class JobsController < ApplicationController
     if current_worker
       if @job.update(pending: true, worker_id: current_worker.id)
         respond_to do |format|
-          flash[:notice] = "You've successfully claimed this job."
           format.html {redirect_to worker_path(current_worker)}
           format.js {render 'update'}
         end
-      elsif @job.update(completed: true)
-        respond_to do |format|
-          flash[:notice] = "Complete Job"
-          format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'update'}
-        end
-      elsif @job.update(active: true)
-        respond_to do |format|
-          flash[:notice] = "Active Job"
-          format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'update'}
-        end
+        flash[:notice] = "You've successfully claimed this job."
+# move elsewhere???
+      # elsif @job.update(completed: true)
+      #   respond_to do |format|
+      #     format.html {redirect_to worker_path(current_worker)}
+      #     format.js {render 'update'}
+      #   end
+      #   flash[:notice] = "Complete Job"
+      # elsif @job.update(active: true)
+      #   respond_to do |format|
+      #     format.html {redirect_to worker_path(current_worker)}
+      #     format.js {render 'update'}
+      #   end
+      #   flash[:notice] = "Active Job"
       else
         flash[:alert] = "Something went wrong!"
         render :show
