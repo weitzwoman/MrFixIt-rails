@@ -6,10 +6,10 @@
   <% if current_worker.id == @job.worker_id %>
 
       <%= form_for @job, :method => "patch", remote: true do |f| %>
-        <%= hidden_field_tag :active, '' %>
+        <%= hidden_field :active, '' %>
         <%= check_box_tag :active, checked = true %>
         <%= f.label :active, "Active Job" %>
-        <%= hidden_field_tag :completed, '' %>
+        <%= hidden_field :completed, '' %>
         <%= check_box_tag :completed, checked = true %>
         <%= f.label :completed, "Completed Job" %>
         <%= f.submit %>

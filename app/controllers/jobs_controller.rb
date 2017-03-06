@@ -29,20 +29,12 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
     if current_worker
-      if params[:completed]
-        @job.update(completed: params[:completed])
+      if params[:completed] && params[:active]
+        @job.update(completed: params[:completed], active: params[:active])
         respond_to do |format|
           format.html { redirect_to job_path(@job) }
           format.js
         end
-        flash[:notice] = "Complete Job"
-      elsif params[:active]
-        @job.update(active: params[:active])
-        respond_to do |format|
-          format.html { redirect_to job_path(@job) }
-          format.js
-        end
-        flash[:notice] = "Active Job"
       elsif @job.update(pending: true, worker_id: current_worker.id)
         respond_to do |format|
           format.html {redirect_to worker_path(current_worker)}
