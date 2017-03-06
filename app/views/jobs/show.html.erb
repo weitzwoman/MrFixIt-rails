@@ -4,15 +4,26 @@
 
 <% if current_worker %>
   <% if current_worker.id == @job.worker_id %>
-    <p>You claimed the job</p>
-    <div id="active-job">
-      <%= button_to "Active?", job_path(@job.active), method: "patch", remote: true %>
-    </div>
-    <br>
-    <div id="complete-job">
-      <%= button_to "Completed?", job_path(@job.completed), method: "patch", remote: true %>
-    </div>
 
+      <%= form_for @job, :method => "patch", remote: true do |f| %>
+        <%= hidden_field_tag :active, '' %>
+        <%= check_box_tag :active, checked = true %>
+        <%= f.label :active, "Active Job" %>
+        <%= hidden_field_tag :completed, '' %>
+        <%= check_box_tag :completed, checked = true %>
+        <%= f.label :completed, "Completed Job" %>
+        <%= f.submit %>
+      <% end %>
+    <br>
+    <div id="jobStatus">
+      <% if @job.completed == true %>
+        <p>You completed this job</p>
+      <% elsif @job.active == true %>
+        <p>You are currently working on this job</p>
+      <% else %>
+        <p>You claimed the job</p>
+      <% end %>
+    </div>
   <% else %>
     <div id="claim-job">
       <p>No one has claimed this job!</p>
