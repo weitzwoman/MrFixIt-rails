@@ -12,6 +12,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    @worker = current_worker
   end
 
   def create

@@ -2,8 +2,8 @@ class WorkersController < ApplicationController
   before_action :authenticate_worker!
 
   def show
-    @worker = Worker.find(params[:id])
-    @jobs = @worker.jobs
+    @worker = current_worker
+    # @jobs = @worker.jobs
     # @active_jobs = @worker.jobs.where(active: true)
     # @complete_jobs = @worker.jobs.where(completed: true)
   end
@@ -22,24 +22,24 @@ class WorkersController < ApplicationController
     end
   end
 
-  def worker_active_job
-    @worker = Worker.find(params[:worker_id])
-    @job = Job.find(params[:job_id])
-    @job.toggle_job
-    respond_to do |format|
-      format.html { redirect_to worker_path(current_worker) }
-      format.js
-    end
-  end
-
-  def worker_complete_job
-    @worker = Worker.find(params[:worker_id])
-    @job = Job.find(params[:job_id])
-    @job.complete_job
-    respond_to do |format|
-      format.html { redirect_to worker_path(current_worker) }
-      format.js
-    end
-  end
+  # def worker_active_job
+  #   @worker = Worker.find(params[:worker_id])
+  #   @job = Job.find(params[:job_id])
+  #   @job.toggle_job
+  #   respond_to do |format|
+  #     format.html { redirect_to worker_path(current_worker) }
+  #     format.js
+  #   end
+  # end
+  #
+  # def worker_complete_job
+  #   @worker = Worker.find(params[:worker_id])
+  #   @job = Job.find(params[:job_id])
+  #   @job.complete_job
+  #   respond_to do |format|
+  #     format.html { redirect_to worker_path(current_worker) }
+  #     format.js
+  #   end
+  # end
 
 end
